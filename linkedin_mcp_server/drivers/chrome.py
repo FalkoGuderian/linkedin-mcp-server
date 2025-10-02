@@ -12,14 +12,11 @@ import os
 import platform
 from typing import Dict, Optional
 
-from linkedin_scraper.exceptions import (
-    CaptchaRequiredError,
-    InvalidCredentialsError,
-    LoginTimeoutError,
-    RateLimitError,
-    SecurityChallengeError,
-    TwoFactorAuthError,
-)
+from linkedin_scraper.exceptions import (CaptchaRequiredError,
+                                         InvalidCredentialsError,
+                                         LoginTimeoutError, RateLimitError,
+                                         SecurityChallengeError,
+                                         TwoFactorAuthError)
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options
@@ -60,6 +57,7 @@ def create_chrome_options(config) -> Options:
         Options: Configured Chrome options object
     """
     chrome_options = Options()
+    chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
     logger.info(
         f"Running browser in {'headless' if config.chrome.headless else 'visible'} mode"

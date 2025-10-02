@@ -21,11 +21,8 @@ import os
 import sys
 from typing import Any, Dict, Optional
 
-from .providers import (
-    get_chromedriver_paths,
-    get_cookie_from_keyring,
-    get_credentials_from_keyring,
-)
+from .providers import (get_chromedriver_paths, get_cookie_from_keyring,
+                        get_credentials_from_keyring)
 from .schema import AppConfig
 
 logger = logging.getLogger(__name__)
@@ -149,6 +146,8 @@ def load_from_env(config: AppConfig) -> AppConfig:
             config.server.transport = "stdio"
         elif transport_env == "streamable-http":
             config.server.transport = "streamable-http"
+        elif transport_env == "sse":
+            config.server.transport = "sse"
 
     return config
 
@@ -179,9 +178,9 @@ def load_from_args(config: AppConfig) -> AppConfig:
 
     parser.add_argument(
         "--transport",
-        choices=["stdio", "streamable-http"],
+        choices=["stdio", "streamable-http", "sse"],
         default=None,
-        help="Specify the transport mode (stdio or streamable-http)",
+        help="Specify the transport mode (stdio, streamable-http, or sse)",
     )
 
     parser.add_argument(

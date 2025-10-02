@@ -47,7 +47,7 @@ class LinkedInConfig:
 class ServerConfig:
     """MCP server configuration."""
 
-    transport: Literal["stdio", "streamable-http"] = "stdio"
+    transport: Literal["stdio", "streamable-http", "sse"] = "stdio"
     transport_explicitly_set: bool = False  # Track if transport was explicitly set
     lazy_init: bool = True
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "WARNING"
