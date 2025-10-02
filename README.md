@@ -339,6 +339,32 @@ uvx --from git+https://github.com/stickerdaniel/linkedin-mcp-server linkedin-mcp
 <br/>
 <br/>
 
+## 🔧 Cline MCP Configuration
+
+To integrate the LinkedIn MCP server with Cline, add the following configuration to your Cline settings (e.g., in your Cline config file):
+
+```json
+{
+  "mcpServers": {
+    "streamable-mcp-server": {
+      "autoApprove": [],
+      "disabled": false,
+      "timeout": 60,
+      "type": "sse",
+      "url": "http://localhost:8000/sse/"
+    }
+  }
+}
+```
+
+**Server Command Adjustment:** Ensure the server runs with SSE transport and path matching the /sse URL above. For Windows cmd (modify the previous running command if needed):
+
+```cmd
+cmd /c "set \"LINKEDIN_COOKIE=YOUR_LINKEDIN_COOKIE_VALUE\" && uv run -m linkedin_mcp_server --transport sse --host 127.0.0.1 --port 8000 --path /sse --log-level DEBUG --no-lazy-init"
+```
+
+For other setups, use `--transport sse --path /sse` accordingly.
+
 ## 🐍 Local Setup (Develop & Contribute)
 
 **Prerequisites:** [Chrome browser](https://www.google.com/chrome/) and [Git](https://git-scm.com/downloads) installed
@@ -350,6 +376,24 @@ uvx --from git+https://github.com/stickerdaniel/linkedin-mcp-server linkedin-mcp
    - Place ChromeDriver in PATH (`/usr/local/bin` on macOS/Linux)
    - Or set: `export CHROMEDRIVER_PATH=/path/to/chromedriver`
    - if no CHROMEDRIVER_PATH is set, the server will try to find it automatically by checking common locations
+
+### Windows Environment Setup
+
+**For Windows users, set ChromeDriver and PATH in PowerShell:**
+
+```powershell
+$env:CHROMEDRIVER_PATH = "C:\Users\[YOUR_USERNAME]\.local\bin\chromedriver.exe"; $env:PATH = "C:\Users\[YOUR_USERNAME]\.local\bin;; uv python;$env:PATH"
+```
+
+Replace `[YOUR_USERNAME]` with your actual Windows username.
+
+### Running the Server on Windows (cmd)
+
+To run the server with LinkedIn cookie using cmd (replace `YOUR_LINKEDIN_COOKIE_VALUE` with your actual cookie value from browser dev tools):
+
+```cmd
+cmd /c "set \"LINKEDIN_COOKIE=YOUR_LINKEDIN_COOKIE_VALUE\" && uv run -m linkedin_mcp_server --transport sse --host 127.0.0.1 --port 8000 --path /mcp --log-level DEBUG --no-lazy-init"
+```
 
 ### Installation
 
