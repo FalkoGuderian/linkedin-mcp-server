@@ -369,6 +369,33 @@ For other setups, use `--transport sse --path /sse` accordingly.
 
 **Prerequisites:** [Chrome browser](https://www.google.com/chrome/) and [Git](https://git-scm.com/downloads) installed
 
+### Getting the LinkedIn Cookie
+
+<details>
+<summary><b>🚀 uv run get-cookie method</b></summary>
+
+**Run the server with the `--get-cookie` flag:**
+```bash
+uv run -m linkedin_mcp_server --get-cookie
+```
+Copy the cookie from the output and set it as `LINKEDIN_COOKIE` in your client configuration. If this fails with a captcha challenge, use the method below.
+</details>
+
+<details>
+<summary><b>🌐 Browser Inspect Method</b></summary>
+
+1. Open LinkedIn and login
+2. Open browser DevTools (F12 or right-click → Inspect)
+3. Go to **Application** > **Storage** > **Cookies** > **https://www.linkedin.com**
+4. Find the cookie named `li_at`
+5. Copy the **Value** field (this is your LinkedIn session cookie)
+6. Use this value as your `LINKEDIN_COOKIE` in the configuration
+
+</details>
+
+> [!NOTE]
+> The cookie will expire during the next 30 days. Just get the new cookie and update your client config. There are also many cookie manager extensions that you can use to quickly copy the cookie.
+
 **ChromeDriver Setup:**
 1. **Check Chrome version**: Chrome → menu (⋮) → Help → About Google Chrome
 2. **Download matching ChromeDriver**: [Chrome for Testing](https://googlechromelabs.github.io/chrome-for-testing/)
